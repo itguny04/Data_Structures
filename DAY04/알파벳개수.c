@@ -29,37 +29,45 @@ void disp(char* pt, int su){
 	puts("");
 }
 
-void check_al(char* pt, int* pt_check, int su){
-	int i;
+void check_output(char* pt_char, int su){
+	int i, j;
+	int cnt = 0;
+	int index = 0;
 	
-	for(i=0;i<su;i++){
-		pt_check[pt[i]-'A']++;
+	for(i='A';i<='Z';i++){
+		cnt = 0;
+		for(j=0;j<su;j++){
+			if(pt_char[j] == i){
+				cnt++; 
+			}	
+		}
+		
+		if(cnt!=0){
+			printf("%c:%d ", i, cnt);
+			index++;
+			if(index%4==0 || index =='Z'){
+				printf("\n");
+			}
+		}
+		
+		else if(index%4==0 && i=='Z'){
+			printf("\n");
+		} //여러 상황에서 실행시켜봐야 할것이여.. 대표적으실행 시켜드릴까요 아 에반데 감사합니다 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ로 어떤 예외가..? 있나여..? 
 	}
-}
+		
+} //저문제 안품???????????????? 
 
-void check_output(int* pt_check){
-	int i;
-	
-	for(i=0;i<26;i++){
-		if(pt_check[i] != 0){
-			printf("%c: %d개 \n", i+'A', pt_check[i]);
-		}	
-	}
-}
-
-int main(){
+int main(void){
 	int su = input();
 	char* ptr_char = (char *)malloc(sizeof(char)*su);
-	int ptr_check[26] = {0,};
+	//그리고 이거때문에 이문제 낸거여... 고민해보시오.. 힌트 있나요ㅕ위에 줬잖아 방금ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ 와일문보다는 이중포문이 나읗듯 ㅅㄱ  
 	srand((unsigned)time(NULL));
 	
 	setData(ptr_char, su);
 	disp(ptr_char, su);
-	check_al(ptr_char, ptr_check, su);
-	check_output(ptr_check);
+	check_output(ptr_char, su);
 
 	free(ptr_char);
 	
     return 0;
-    
 }
